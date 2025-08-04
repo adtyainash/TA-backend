@@ -1,15 +1,25 @@
 # main.py
 
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import date, timedelta
 from sqlalchemy.orm import Session
 from db import SessionLocal
-from models import DailyCaseInput, PredictionInput
-from crud import insert_daily_case, aggregate_daily_to_weekly, get_weekly_stats, get_latest_yearweek
+from models import DailyCaseInput, PredictionInput, DiagnoseInput
+from crud import insert_daily_case, aggregate_daily_to_weekly, get_weekly_stats, get_latest_yearweek, insert_diagnosis
 from model_trainer import ModelTrainer
 from typing import List, Optional
 
 app = FastAPI()
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Dependency to get DB session
 def get_db():
@@ -24,6 +34,14 @@ def get_db():
 def submit_case(case: DailyCaseInput, db: Session = Depends(get_db)):
     insert_daily_case(db, case)
     return {"message": "Case submitted successfully"}
+
+@app.post("/submit_diagnosis")
+def submit_diagnosis(diagnose: DiagnoseInput, db: Session = Depends(get_db)):
+    try:
+        insert_diagnosis(db, diagnose)
+        return {"message": "Diagnosis submitted successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error submitting diagnosis: {str(e)}")
 
 @app.post("/aggregate_weekly/")
 def aggregate_weekly(target_yearweek: Optional[str] = None, db: Session = Depends(get_db)):

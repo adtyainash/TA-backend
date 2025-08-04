@@ -1,7 +1,7 @@
 # crud.py
 
 from sqlalchemy.orm import Session
-from models import DailyCase, DailyCaseInput
+from models import DailyCase, DailyCaseInput, DiagnoseInput
 from sqlalchemy import text, func
 from datetime import date, timedelta
 from typing import Optional
@@ -38,6 +38,8 @@ def insert_daily_case(db: Session, case_input: DailyCaseInput):
         "code": case_input.code
     })
     db.commit()
+
+
 
 def aggregate_daily_to_weekly(db: Session, target_yearweek: Optional[str] = None):
     """
@@ -118,3 +120,18 @@ def get_weekly_stats(db: Session, yearweek: Optional[str] = None):
             ORDER BY wc.yearweek DESC, wc.cases DESC
         """)
         return db.execute(sql).fetchall()
+    
+def insert_diagnosis(db: Session, diagnose_input: DiagnoseInput):
+    
+    """Insert a new diagnosis record"""
+    sql = text("""
+        INSERT INTO public.diagnosis (nik_pasien, id_puskesmas, id_penyakit)
+        VALUES (:nik, :puskesmas, :penyakit)
+        ON CONFLICT (nik_pasien, id_puskesmas, id_penyakit) DO NOTHING
+    """)
+    db.execute(sql, {
+        "nik": diagnose_input.nik,
+        "puskesmas": diagnose_input.Kode_kecamatan,
+        "penyakit": diagnose_input.ICD10_code
+    })
+    db.commit()
