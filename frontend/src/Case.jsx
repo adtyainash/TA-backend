@@ -42,11 +42,11 @@ const Case = () => {
   };
 
   const fetchPenyakit = async () => {
-    const { data, error } = await supabase.from('penyakit').select('icd10, nama_penyakit, keterangan');
+    const { data, error } = await supabase.from('penyakit').select('ICD10, nama_penyakit, keterangan');
     if (!error) {
       const formatted = data.map(p => ({
-        value: p.icd10,
-        label: `${p.nama_penyakit} (${p.icd10})`,
+        value: p.ICD10,
+        label: `${p.nama_penyakit} (${p.ICD10})`,
         description: p.keterangan
       }));
       setPenyakitOptions(formatted);
@@ -63,7 +63,7 @@ const Case = () => {
       [name]: value
     }));
 
-    if (name === 'icd10') {
+    if (name === 'ICD10') {
       const selected = penyakitOptions.find(p => p.value === value);
       setSelectedPenyakitDescription(selected?.description || '');
     }
@@ -123,10 +123,10 @@ const Case = () => {
             ))}
           </select>
 
-          <label htmlFor="icd10">Nama Penyakit:</label>
+          <label htmlFor="ICD10">Nama Penyakit:</label>
           <select
-            name="icd10"
-            value={formData.ICD10_code}
+            name="ICD10"
+            value={formData.ICD10}
             onChange={handleChange}
             required
           >
