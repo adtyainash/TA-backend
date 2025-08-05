@@ -125,7 +125,7 @@ const Case = () => {
 
           <label htmlFor="ICD10">Nama Penyakit:</label>
           <select
-            name="ICD10"
+            name="ICD10_code"
             value={formData.ICD10}
             onChange={handleChange}
             required
