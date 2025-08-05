@@ -15,7 +15,7 @@ module.exports = {
     {
       name: "react-frontend",
       script: "npm",
-      args: "run serve",
+      args: "run dev",
       cwd: path.resolve(__dirname, "frontend"),
       env: {
         NODE_ENV: "production",
