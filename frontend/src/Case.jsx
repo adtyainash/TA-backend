@@ -14,7 +14,7 @@ const Case = () => {
   const [formData, setFormData] = useState({
     nik: '',
     Kode_kecamatan: '',
-    icd10: ''
+    ICD10_code: ''
   });
 
   const [statusMessage, setStatusMessage] = useState('');
@@ -42,11 +42,11 @@ const Case = () => {
   };
 
   const fetchPenyakit = async () => {
-    const { data, error } = await supabase.from('penyakit').select('ICD10, nama_penyakit, keterangan');
+    const { data, error } = await supabase.from('penyakit').select('ICD10_code, nama_penyakit, keterangan');
     if (!error) {
       const formatted = data.map(p => ({
-        value: p.ICD10,
-        label: `${p.nama_penyakit} (${p.ICD10})`,
+        value: p.ICD10_code,
+        label: `${p.nama_penyakit} (${p.ICD10_code})`,
         description: p.keterangan
       }));
       setPenyakitOptions(formatted);
@@ -63,7 +63,7 @@ const Case = () => {
       [name]: value
     }));
 
-    if (name === 'icd10') {
+    if (name === 'ICD10_code') {
       const selected = penyakitOptions.find(p => p.value === value);
       setSelectedPenyakitDescription(selected?.description || '');
     }
@@ -123,10 +123,10 @@ const Case = () => {
             ))}
           </select>
 
-          <label htmlFor="icd10">Nama Penyakit:</label>
+          <label htmlFor="ICD10_code">Nama Penyakit:</label>
           <select
-            name="icd10"
-            value={formData.icd10}
+            name="ICD10_code"
+            value={formData.ICD10_code}
             onChange={handleChange}
             required
           >
