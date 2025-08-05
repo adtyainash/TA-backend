@@ -63,7 +63,7 @@ const Case = () => {
       [name]: value
     }));
 
-    if (name === 'ICD10') {
+    if (name === 'ICD10_code') {
       const selected = penyakitOptions.find(p => p.value === value);
       setSelectedPenyakitDescription(selected?.description || '');
     }
