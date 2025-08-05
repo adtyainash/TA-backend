@@ -8,7 +8,7 @@ const supabase = createClient(
   import.meta.env.VITE_SUPABASE_ANON_KEY
 );
 
-const baseURL = 'api.disease-surveillance-dashboard.online';
+const baseURL = 'https://api.disease-surveillance-dashboard.online';
 
 const Case = () => {
   const [formData, setFormData] = useState({
