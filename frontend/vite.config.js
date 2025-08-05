@@ -13,7 +13,8 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
-    }
+    },
+    allowedHosts: ['disease-surveillance-dashboard.online']
   },
   optimizeDeps: {
     exclude: ['crypto']
