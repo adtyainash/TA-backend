@@ -122,3 +122,14 @@ class DiagnosisDB(Base):
     # Relationships
     pasien = relationship("PasienDB", back_populates="diagnosis")
     penyakit = relationship("PenyakitDB", back_populates="diagnosis")
+
+class NotificationDB(Base):
+    __tablename__ = "notifications"
+
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    created_at = Column(TIMESTAMP(timezone=True), nullable=False)
+    ICD10_code = Column(Text, ForeignKey("penyakit.ICD10"))
+    message = Column(Text, nullable=False)
+
+    # Relationship to penyakit table
+    penyakit = relationship("PenyakitDB", back_populates="notifications")
