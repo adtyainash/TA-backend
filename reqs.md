@@ -2,7 +2,7 @@
 I want to revise the prototype website, before it is only simple. Now I want the prototype to be wider so it will include the interface of a staff (lets say his name is Adimas) that handles lets say 10 customers. And I also want a dashboard view for the staff so it can monitor his customer portfolio. Preserve current design for list page and customer detail page. For Dashboard page use BRI color palette with other colors that is relevant.
 
 ## Task:
-1. Create Dummy Data
+1. Create Dummy Data\
    Create 10 dummy data for customer-collateral Information data : 
    | Column Name | Data type | Data Sample | Desc |
    |-------------|-----------|-------------|-------|
@@ -26,32 +26,32 @@ I want to revise the prototype website, before it is only simple. Now I want the
    | Penilaian Agunan Terakhir Oleh | String | Bank | Just fill with either Bank or AO |
    | Nama perusahaan asuransi | String | ABD | Fill with Indonesian property insurance name |
    | Nilai coverage asuransi | Integer | 800000000 | Fill with suitable number for collateral insurance coverage |
-3. List page
+3. List page\
    Show All Nama Debitur, its outstanding, and status. Add filter by Jenis Kredit, Unit kerja, status, jenis agunan. Add search by Nama Debitur
-4. Customer Detail page
+4. Customer Detail page\
    Will be opened by clicking data in list page
-   - Customer & Collateral Information
+   - Customer & Collateral Information\
      List down all the information of customer selected
-   - Quadrant & Marketability Information
+   - Quadrant & Marketability Information\
      User fill pop up questionnaire (questions and answer attached in xlsx, with Kategori to differentiate the section, show pertanyaan and jawaban (dont show the score)). Plez pre-fill 5 of the data (so there will be data in the dashboard). Sisanya user yang akan isi.
-   - Add New Appraisal & Appraisal History
+   - Add New Appraisal & Appraisal History\
      Same as before (Riwayat Penilaian Agunan). Don't change anything
-5. Dashboard Page
-   Content:
-   - Total Outstanding
-   - Total Nilai Pasar Wajar
-   - Total Nilai Likuidasi
-   - CCR Outstanding terhadap Nilai Pasar dan terhadap Nilai Likuidasi
-   - Kemutakhiran Penilaian (from last appraisal date)
-   - Jenis Agunan distribution
-   - Marketability & quadrant disribution
-   Slicer:
-   - Jenis Kredit
-   - Unit kerja
-   - Status
+5. Dashboard Page\
+   - Content:
+      - Total Outstanding
+      - Total Nilai Pasar Wajar
+      - Total Nilai Likuidasi
+      - CCR Outstanding terhadap Nilai Pasar dan terhadap Nilai Likuidasi
+      - Kemutakhiran Penilaian (from last appraisal date)
+      - Jenis Agunan distribution
+      - Marketability & quadrant disribution
+   - Slicer:
+      - Jenis Kredit
+      - Unit kerja
+      - Status
 
 ## Logic
-- Marketability Logic
+- Marketability Logic\
   So when user pick answer for each question, it has scores with range 1-5. Each category has the same weight so 4 categories, 1 category= 25%. Final score will be (total score from each categories * weight)/total category (4). EXCLUDE QUESTION L-3 & L-4 (it's for quadrant). If "Kuadran 4" even don't show the marketability, just show "Selesaikan masalah hukum agunan terlebih dahulu"
   | Overall score | Category |
   |---|---|
@@ -59,7 +59,7 @@ I want to revise the prototype website, before it is only simple. Now I want the
   | **3.00–<4.00** | MEPO — Medium Potential |
   | **2.00–<3.00** | LOPO — Low Potential |
   | **1.00–<2.00** | NOPO — No Potential |
-- Quadrant Logic
+- Quadrant Logic\
   if L-3 score = 5 THEN "Kuadran 1"
   else
     if L-4 score = 5 THEN "Kuadran 2"
